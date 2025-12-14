@@ -1,0 +1,74 @@
+name: NoLookNoteTaker
+options:
+  bundleIdPrefix: com.nolooknotetaker
+  deploymentTarget:
+    iOS: "18.0"
+    watchOS: "26.0"
+  xcodeVersion: "16.0"
+
+settings:
+  DEVELOPMENT_TEAM: R4ART4YK4K
+
+packages:
+  Firebase:
+    url: https://github.com/firebase/firebase-ios-sdk
+    version: 11.0.0
+
+targets:
+  NoLookNoteTaker:
+    type: application
+    platform: iOS
+    sources:
+      - NoLookNoteTaker
+    info:
+      path: NoLookNoteTaker/Info.plist
+      properties:
+        CFBundleDisplayName: NoLookNoteTaker
+        UILaunchScreen: {}
+        NSMicrophoneUsageDescription: "Record voice notes for transcription"
+    dependencies:
+      - package: Firebase
+        product: FirebaseAuth
+      - package: Firebase
+        product: FirebaseFirestore
+      - package: Firebase
+        product: FirebaseStorage
+      - target: NoLookNoteTaker Watch App
+        embed: true
+
+  NoLookNoteTaker Watch App:
+    type: application
+    platform: watchOS
+    bundleIdPrefix: com.nolooknotetaker.NoLookNoteTaker
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.nolooknotetaker.NoLookNoteTaker.watchkitapp
+    sources:
+      - NoLookNoteTaker Watch App
+    info:
+      path: NoLookNoteTaker Watch App/Info.plist
+      properties:
+        CFBundleDisplayName: NoLookNoteTaker
+        WKApplication: true
+        WKCompanionAppBundleIdentifier: com.nolooknotetaker.NoLookNoteTaker
+        NSMicrophoneUsageDescription: "Record voice notes for transcription"
+        CFBundleURLTypes:
+          - CFBundleURLName: com.nolooknotetaker.NoLookNoteTaker.watchkitapp
+            CFBundleURLSchemes:
+              - nolooknotetaker
+    dependencies:
+      - target: NoLookNoteTaker Watch Widget
+        embed: true
+
+  NoLookNoteTaker Watch Widget:
+    type: app-extension
+    platform: watchOS
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.nolooknotetaker.NoLookNoteTaker.watchkitapp.widget
+    sources:
+      - NoLookNoteTaker Watch Widget
+    info:
+      path: NoLookNoteTaker Watch Widget/Info.plist
+      properties:
+        CFBundleDisplayName: Voice Note
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension

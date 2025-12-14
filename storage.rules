@@ -1,0 +1,10 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Users can only read/write their own recordings
+    match /recordings/{userId}/{recordingId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}

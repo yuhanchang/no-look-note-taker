@@ -1,0 +1,30 @@
+# Secrets - DO NOT COMMIT
+.openai-key
+.env
+*.secret
+GoogleService-Info.plist
+
+# Xcode
+build/
+DerivedData/
+*.xcuserstate
+*.xcworkspace/xcuserdata/
+xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/
+
+# Firebase
+.firebase/
+functions/node_modules/
+functions/.env
+
+# Node
+node_modules/
+.npm
+
+# Web app build
+web/dist/
+web/node_modules/
+
+# macOS
+.DS_Store

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>No Look Note Taker</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f7;
+            color: #1d1d1f;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-bottom: 30px;
+            border-radius: 0 0 20px 20px;
+        }
+
+        header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .auth-section {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .auth-section button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 32px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .auth-section button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: #86868b;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #86868b;
+        }
+
+        .empty-state .icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .notes-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .note-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .note-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .note-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: #86868b;
+        }
+
+        .status-badge {
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .status-complete { background: #d4edda; color: #155724; }
+        .status-transcribing { background: #fff3cd; color: #856404; }
+        .status-error { background: #f8d7da; color: #721c24; }
+        .status-uploading { background: #cce5ff; color: #004085; }
+
+        .note-content {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #1d1d1f;
+        }
+
+        .note-content.placeholder {
+            color: #86868b;
+            font-style: italic;
+        }
+
+        .note-detail {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .note-detail.active {
+            display: flex;
+        }
+
+        .note-detail-content {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .note-detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #86868b;
+        }
+
+        .note-detail-text {
+            font-size: 16px;
+            line-height: 1.8;
+            white-space: pre-wrap;
+        }
+
+        .user-info {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #86868b;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-info button {
+            background: none;
+            border: none;
+            color: #667eea;
+            cursor: pointer;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>📝 No Look Note Taker</h1>
+        <p>Your voice notes, transcribed</p>
+    </header>
+
+    <div class="container">
+        <div id="auth-section" class="auth-section" style="display: none;">
+            <p style="margin-bottom: 20px;">Sign in to view your notes</p>
+            <button onclick="signIn()">Sign In Anonymously</button>
+        </div>
+
+        <div id="loading" class="loading" style="display: none;">
+            <p>Loading your notes...</p>
+        </div>
+
+        <div id="empty-state" class="empty-state" style="display: none;">
+            <div class="icon">🎙️</div>
+            <h2>No notes yet</h2>
+            <p>Record a voice note on your Apple Watch to get started.</p>
+        </div>
+
+        <div id="notes-list" class="notes-list"></div>
+    </div>
+
+    <div id="note-detail" class="note-detail">
+        <div class="note-detail-content">
+            <div class="note-detail-header">
+                <span id="detail-date"></span>
+                <button class="close-btn" onclick="closeDetail()">&times;</button>
+            </div>
+            <div id="detail-text" class="note-detail-text"></div>
+        </div>
+    </div>
+
+    <div id="user-info" class="user-info" style="display: none;">
+        Signed in
+        <button onclick="signOut()">Sign out</button>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
+        import { getAuth, signInAnonymously, onAuthStateChanged, signOut as firebaseSignOut } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
+        import { getFirestore, collection, query, orderBy, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js';
+
+        // Firebase config
+        const firebaseConfig = {
+            apiKey: "AIzaSyBYjolSmrk9fiV6LxhMCHW2aXKek-PW1I4",
+            authDomain: "no-look-note-taker.firebaseapp.com",
+            projectId: "no-look-note-taker",
+            storageBucket: "no-look-note-taker.firebasestorage.app",
+            messagingSenderId: "825283262610",
+            appId: "1:825283262610:web:ae9249ec26d649c7d58e4b"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let unsubscribe = null;
+
+        // Make functions globally available
+        window.signIn = async () => {
+            try {
+                await signInAnonymously(auth);
+            } catch (error) {
+                console.error('Sign in error:', error);
+                alert('Failed to sign in: ' + error.message);
+            }
+        };
+
+        window.signOut = async () => {
+            try {
+                if (unsubscribe) unsubscribe();
+                await firebaseSignOut(auth);
+            } catch (error) {
+                console.error('Sign out error:', error);
+            }
+        };
+
+        window.openDetail = (transcription, date) => {
+            document.getElementById('detail-text').textContent = transcription || 'No transcription available';
+            document.getElementById('detail-date').textContent = date;
+            document.getElementById('note-detail').classList.add('active');
+        };
+
+        window.closeDetail = () => {
+            document.getElementById('note-detail').classList.remove('active');
+        };
+
+        // Close modal on outside click
+        document.getElementById('note-detail').addEventListener('click', (e) => {
+            if (e.target.id === 'note-detail') closeDetail();
+        });
+
+        // Auth state listener
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById('auth-section').style.display = 'none';
+                document.getElementById('user-info').style.display = 'block';
+                document.getElementById('loading').style.display = 'block';
+                listenToNotes(user.uid);
+            } else {
+                document.getElementById('auth-section').style.display = 'block';
+                document.getElementById('user-info').style.display = 'none';
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('notes-list').innerHTML = '';
+                document.getElementById('empty-state').style.display = 'none';
+                if (unsubscribe) unsubscribe();
+            }
+        });
+
+        function listenToNotes(userId) {
+            const notesRef = collection(db, 'users', userId, 'notes');
+            const q = query(notesRef, orderBy('createdAt', 'desc'));
+
+            unsubscribe = onSnapshot(q, (snapshot) => {
+                document.getElementById('loading').style.display = 'none';
+
+                if (snapshot.empty) {
+                    document.getElementById('empty-state').style.display = 'block';
+                    document.getElementById('notes-list').innerHTML = '';
+                    return;
+                }
+
+                document.getElementById('empty-state').style.display = 'none';
+
+                const notesHtml = snapshot.docs.map(doc => {
+                    const note = doc.data();
+                    const date = note.createdAt?.toDate();
+                    const dateStr = date ? formatDate(date) : 'Just now';
+                    const statusClass = `status-${note.status}`;
+
+                    let content = '';
+                    if (note.transcription) {
+                        content = `<div class="note-content">${truncate(note.transcription, 200)}</div>`;
+                    } else if (note.status === 'error') {
+                        content = `<div class="note-content placeholder">${note.error || 'Transcription failed'}</div>`;
+                    } else {
+                        content = `<div class="note-content placeholder">Transcribing...</div>`;
+                    }
+
+                    return `
+                        <div class="note-card" onclick="openDetail(\`${escapeHtml(note.transcription || '')}\`, '${dateStr}')">
+                            <div class="note-header">
+                                <span>${dateStr}</span>
+                                <span class="status-badge ${statusClass}">${note.status}</span>
+                            </div>
+                            ${content}
+                        </div>
+                    `;
+                }).join('');
+
+                document.getElementById('notes-list').innerHTML = notesHtml;
+            }, (error) => {
+                console.error('Error listening to notes:', error);
+                document.getElementById('loading').style.display = 'none';
+            });
+        }
+
+        function formatDate(date) {
+            const now = new Date();
+            const diff = now - date;
+            const minutes = Math.floor(diff / 60000);
+            const hours = Math.floor(diff / 3600000);
+            const days = Math.floor(diff / 86400000);
+
+            if (minutes < 1) return 'Just now';
+            if (minutes < 60) return `${minutes}m ago`;
+            if (hours < 24) return `${hours}h ago`;
+            if (days < 7) return `${days}d ago`;
+            return date.toLocaleDateString();
+        }
+
+        function truncate(str, length) {
+            if (!str) return '';
+            return str.length > length ? str.substring(0, length) + '...' : str;
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/`/g, '\\`').replace(/\$/g, '\\$');
+        }
+    </script>
+</body>
+</html>

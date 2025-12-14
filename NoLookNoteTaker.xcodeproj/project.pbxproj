@@ -1,0 +1,645 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0CD8A00AE6DAB44EC904916F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC428A4B21DD1ADA016EEAA /* ContentView.swift */; };
+		2F6B1D1974F48386BDC7F6A4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 76FAE1FD227F0988D1307501 /* FirebaseAuth */; };
+		3C9946B72E3F47D6FF2C6D9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC8472FA268D4E85E5D2016E /* Assets.xcassets */; };
+		470385F055066D723D98D398 /* WatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAEF8CFFA72C4ECD715E350 /* WatchConnectivityManager.swift */; };
+		48BE7C7E81441B015B1F90C4 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 48915813534FCA336AD7A388 /* FirebaseFirestore */; };
+		5601A58CB1F68C4AFFBA0158 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 37CC83141883510B4D5365BA /* FirebaseStorage */; };
+		58597CFB82EC7A2D11FF0758 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73004FE831D5295621A44067 /* Assets.xcassets */; };
+		598AC5369B661A5ECE569873 /* NoLookNoteTaker Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A9E6A34D5B17714A5400BCC7 /* NoLookNoteTaker Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		618F92422925556E2A5FEF8F /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E061C861FDF22F205C044A4 /* AppState.swift */; };
+		77C3E241AABF90AF71FA27DF /* ComplicationWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2E82EC612270F4C4FD0505 /* ComplicationWidget.swift */; };
+		85B59E84776E098D088225AF /* NoLookNoteTakerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3CDF8794DB7B7412B1F01A /* NoLookNoteTakerApp.swift */; };
+		86A46D6CF620F44F0AA4A61C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1D58A8A6523021E016EF99 /* ContentView.swift */; };
+		9040A397D1CAAD12157C1165 /* AudioRecorderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E96C038CA6E9C74819EE603 /* AudioRecorderManager.swift */; };
+		9AA49B86AC0AF1A17BBAA16F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C462FB6204928BCC84E9A7D /* GoogleService-Info.plist */; };
+		B0E813625EE74DEEDE0232B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAAD5D236566D7C45C353DDA /* Assets.xcassets */; };
+		B988CC36D891230D6E14C092 /* NoLookNoteTakerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686F41FB35C1A101404485A2 /* NoLookNoteTakerApp.swift */; };
+		CFD558EB2CA0A87CBDAFD440 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4440131EA8F0B801372F27 /* Note.swift */; };
+		D43729F4B86E851DA73C42B6 /* WatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEF2735F7C3337DFE23A680 /* WatchConnectivityManager.swift */; };
+		D6DFA033FA59E8282DAD970A /* AppIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF37BF4BF98B73D3971A12F /* AppIntents.swift */; };
+		E1B6F22A4E0B02158C7C3D39 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2627FBACCD1B91E8AFA00AF8 /* GoogleService-Info.plist */; };
+		EB247480EB2764D5D42F99A9 /* NoLookNoteTaker Watch Widget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9D791E02AFE6B08534AE2C7B /* NoLookNoteTaker Watch Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EE88DCA52557859703A74C66 /* NotesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1912FAED87B7002A58268E6F /* NotesViewModel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4335B2CA7DA9D7485C5CCF03 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 81D4029EAF98B21CBEFC3060 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D6B645821266FE3F22CA88B1;
+			remoteInfo = "NoLookNoteTaker Watch Widget";
+		};
+		915C9B661DD9AE8A975BBCC3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 81D4029EAF98B21CBEFC3060 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E186D9DE3C1D2CCBC81B47B6;
+			remoteInfo = "NoLookNoteTaker Watch App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2D8F7F449C3CC8E5507002FC /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				598AC5369B661A5ECE569873 /* NoLookNoteTaker Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC4481B3A3EAAAB4B53FE8B6 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				EB247480EB2764D5D42F99A9 /* NoLookNoteTaker Watch Widget.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		1912FAED87B7002A58268E6F /* NotesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewModel.swift; sourceTree = "<group>"; };
+		1F1D58A8A6523021E016EF99 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2627FBACCD1B91E8AFA00AF8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3AEF2735F7C3337DFE23A680 /* WatchConnectivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivityManager.swift; sourceTree = "<group>"; };
+		4E96C038CA6E9C74819EE603 /* AudioRecorderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderManager.swift; sourceTree = "<group>"; };
+		5C462FB6204928BCC84E9A7D /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		686F41FB35C1A101404485A2 /* NoLookNoteTakerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoLookNoteTakerApp.swift; sourceTree = "<group>"; };
+		697BF3DE5CC476A031BFE1B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		73004FE831D5295621A44067 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7BC428A4B21DD1ADA016EEAA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7E061C861FDF22F205C044A4 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		7E2E82EC612270F4C4FD0505 /* ComplicationWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationWidget.swift; sourceTree = "<group>"; };
+		9D791E02AFE6B08534AE2C7B /* NoLookNoteTaker Watch Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "NoLookNoteTaker Watch Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E3CDF8794DB7B7412B1F01A /* NoLookNoteTakerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoLookNoteTakerApp.swift; sourceTree = "<group>"; };
+		A9E6A34D5B17714A5400BCC7 /* NoLookNoteTaker Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NoLookNoteTaker Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BAAD5D236566D7C45C353DDA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BDF37BF4BF98B73D3971A12F /* AppIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntents.swift; sourceTree = "<group>"; };
+		CD4440131EA8F0B801372F27 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		D0B3516556AA893A25D1CCE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		DF16B0129B12FEF314232DDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		EC8472FA268D4E85E5D2016E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FBAEF8CFFA72C4ECD715E350 /* WatchConnectivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivityManager.swift; sourceTree = "<group>"; };
+		FE6A809533667CCEF3862039 /* NoLookNoteTaker.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = NoLookNoteTaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5FAA590891E5C01EF41653B4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F6B1D1974F48386BDC7F6A4 /* FirebaseAuth in Frameworks */,
+				48BE7C7E81441B015B1F90C4 /* FirebaseFirestore in Frameworks */,
+				5601A58CB1F68C4AFFBA0158 /* FirebaseStorage in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		65556CFFC44E65CE58213DFE /* NoLookNoteTaker */ = {
+			isa = PBXGroup;
+			children = (
+				BAAD5D236566D7C45C353DDA /* Assets.xcassets */,
+				7BC428A4B21DD1ADA016EEAA /* ContentView.swift */,
+				2627FBACCD1B91E8AFA00AF8 /* GoogleService-Info.plist */,
+				D0B3516556AA893A25D1CCE8 /* Info.plist */,
+				686F41FB35C1A101404485A2 /* NoLookNoteTakerApp.swift */,
+				CD4440131EA8F0B801372F27 /* Note.swift */,
+				1912FAED87B7002A58268E6F /* NotesViewModel.swift */,
+				3AEF2735F7C3337DFE23A680 /* WatchConnectivityManager.swift */,
+			);
+			path = NoLookNoteTaker;
+			sourceTree = "<group>";
+		};
+		73F0602957EFC3851BF79B70 /* NoLookNoteTaker Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				BDF37BF4BF98B73D3971A12F /* AppIntents.swift */,
+				7E061C861FDF22F205C044A4 /* AppState.swift */,
+				73004FE831D5295621A44067 /* Assets.xcassets */,
+				4E96C038CA6E9C74819EE603 /* AudioRecorderManager.swift */,
+				1F1D58A8A6523021E016EF99 /* ContentView.swift */,
+				5C462FB6204928BCC84E9A7D /* GoogleService-Info.plist */,
+				DF16B0129B12FEF314232DDB /* Info.plist */,
+				9E3CDF8794DB7B7412B1F01A /* NoLookNoteTakerApp.swift */,
+				FBAEF8CFFA72C4ECD715E350 /* WatchConnectivityManager.swift */,
+			);
+			path = "NoLookNoteTaker Watch App";
+			sourceTree = "<group>";
+		};
+		CEFD5C92461E09C1872EB031 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A9E6A34D5B17714A5400BCC7 /* NoLookNoteTaker Watch App.app */,
+				9D791E02AFE6B08534AE2C7B /* NoLookNoteTaker Watch Widget.appex */,
+				FE6A809533667CCEF3862039 /* NoLookNoteTaker.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D5E5E806623A94027E6A1148 /* NoLookNoteTaker Watch Widget */ = {
+			isa = PBXGroup;
+			children = (
+				EC8472FA268D4E85E5D2016E /* Assets.xcassets */,
+				7E2E82EC612270F4C4FD0505 /* ComplicationWidget.swift */,
+				697BF3DE5CC476A031BFE1B1 /* Info.plist */,
+			);
+			path = "NoLookNoteTaker Watch Widget";
+			sourceTree = "<group>";
+		};
+		E6925C0EAC64AAD0279ED1FF = {
+			isa = PBXGroup;
+			children = (
+				65556CFFC44E65CE58213DFE /* NoLookNoteTaker */,
+				73F0602957EFC3851BF79B70 /* NoLookNoteTaker Watch App */,
+				D5E5E806623A94027E6A1148 /* NoLookNoteTaker Watch Widget */,
+				CEFD5C92461E09C1872EB031 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A0BDA18D8459D19F464E8277 /* NoLookNoteTaker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AADEABF4256D6591CCDA3A1D /* Build configuration list for PBXNativeTarget "NoLookNoteTaker" */;
+			buildPhases = (
+				56943D20F20BD7F77CCB1113 /* Sources */,
+				709377FD17C2787E2FCE99FC /* Resources */,
+				5FAA590891E5C01EF41653B4 /* Frameworks */,
+				2D8F7F449C3CC8E5507002FC /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5CC5FEB02D985673F624626E /* PBXTargetDependency */,
+			);
+			name = NoLookNoteTaker;
+			packageProductDependencies = (
+				76FAE1FD227F0988D1307501 /* FirebaseAuth */,
+				48915813534FCA336AD7A388 /* FirebaseFirestore */,
+				37CC83141883510B4D5365BA /* FirebaseStorage */,
+			);
+			productName = NoLookNoteTaker;
+			productReference = FE6A809533667CCEF3862039 /* NoLookNoteTaker.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D6B645821266FE3F22CA88B1 /* NoLookNoteTaker Watch Widget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B44076900908F678C55A2429 /* Build configuration list for PBXNativeTarget "NoLookNoteTaker Watch Widget" */;
+			buildPhases = (
+				4ADF76CAC78251894FFE3BA5 /* Sources */,
+				36A65F1D4462D5C98FE40C4C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "NoLookNoteTaker Watch Widget";
+			packageProductDependencies = (
+			);
+			productName = "NoLookNoteTaker Watch Widget";
+			productReference = 9D791E02AFE6B08534AE2C7B /* NoLookNoteTaker Watch Widget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		E186D9DE3C1D2CCBC81B47B6 /* NoLookNoteTaker Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 28D1848170E2AD7F019B6072 /* Build configuration list for PBXNativeTarget "NoLookNoteTaker Watch App" */;
+			buildPhases = (
+				B689DB39FBD0F97D138BAE0A /* Sources */,
+				802CA14F126C5877AFBFF06B /* Resources */,
+				EC4481B3A3EAAAB4B53FE8B6 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				56FAD2E9004A58F7169299E2 /* PBXTargetDependency */,
+			);
+			name = "NoLookNoteTaker Watch App";
+			packageProductDependencies = (
+			);
+			productName = "NoLookNoteTaker Watch App";
+			productReference = A9E6A34D5B17714A5400BCC7 /* NoLookNoteTaker Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		81D4029EAF98B21CBEFC3060 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					A0BDA18D8459D19F464E8277 = {
+						DevelopmentTeam = R4ART4YK4K;
+					};
+					D6B645821266FE3F22CA88B1 = {
+						DevelopmentTeam = R4ART4YK4K;
+					};
+					E186D9DE3C1D2CCBC81B47B6 = {
+						DevelopmentTeam = R4ART4YK4K;
+					};
+				};
+			};
+			buildConfigurationList = B7770E3D17F88A858D7F1B0B /* Build configuration list for PBXProject "NoLookNoteTaker" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = E6925C0EAC64AAD0279ED1FF;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				DA092B75C895C684FDDDA9A3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A0BDA18D8459D19F464E8277 /* NoLookNoteTaker */,
+				E186D9DE3C1D2CCBC81B47B6 /* NoLookNoteTaker Watch App */,
+				D6B645821266FE3F22CA88B1 /* NoLookNoteTaker Watch Widget */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		36A65F1D4462D5C98FE40C4C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C9946B72E3F47D6FF2C6D9C /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		709377FD17C2787E2FCE99FC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0E813625EE74DEEDE0232B5 /* Assets.xcassets in Resources */,
+				E1B6F22A4E0B02158C7C3D39 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		802CA14F126C5877AFBFF06B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				58597CFB82EC7A2D11FF0758 /* Assets.xcassets in Resources */,
+				9AA49B86AC0AF1A17BBAA16F /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4ADF76CAC78251894FFE3BA5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77C3E241AABF90AF71FA27DF /* ComplicationWidget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		56943D20F20BD7F77CCB1113 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CD8A00AE6DAB44EC904916F /* ContentView.swift in Sources */,
+				B988CC36D891230D6E14C092 /* NoLookNoteTakerApp.swift in Sources */,
+				CFD558EB2CA0A87CBDAFD440 /* Note.swift in Sources */,
+				EE88DCA52557859703A74C66 /* NotesViewModel.swift in Sources */,
+				D43729F4B86E851DA73C42B6 /* WatchConnectivityManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B689DB39FBD0F97D138BAE0A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6DFA033FA59E8282DAD970A /* AppIntents.swift in Sources */,
+				618F92422925556E2A5FEF8F /* AppState.swift in Sources */,
+				9040A397D1CAAD12157C1165 /* AudioRecorderManager.swift in Sources */,
+				86A46D6CF620F44F0AA4A61C /* ContentView.swift in Sources */,
+				85B59E84776E098D088225AF /* NoLookNoteTakerApp.swift in Sources */,
+				470385F055066D723D98D398 /* WatchConnectivityManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		56FAD2E9004A58F7169299E2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D6B645821266FE3F22CA88B1 /* NoLookNoteTaker Watch Widget */;
+			targetProxy = 4335B2CA7DA9D7485C5CCF03 /* PBXContainerItemProxy */;
+		};
+		5CC5FEB02D985673F624626E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E186D9DE3C1D2CCBC81B47B6 /* NoLookNoteTaker Watch App */;
+			targetProxy = 915C9B661DD9AE8A975BBCC3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		08353E09314169E604639F93 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = NoLookNoteTaker/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nolooknotetaker.NoLookNoteTaker;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1E683EA716A40799B4D6E97C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "NoLookNoteTaker Watch App/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nolooknotetaker.NoLookNoteTaker.watchkitapp;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Debug;
+		};
+		4B98243EA5F078B85E5BD6D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "NoLookNoteTaker Watch Widget/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nolooknotetaker.NoLookNoteTaker.watchkitapp.widget;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Debug;
+		};
+		5A12FBEF0F5DACEA949496D3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = R4ART4YK4K;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Debug;
+		};
+		853307C0CA46035ED72529EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "NoLookNoteTaker Watch Widget/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nolooknotetaker.NoLookNoteTaker.watchkitapp.widget;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Release;
+		};
+		A5EAD7404E56CB0DEEF6979B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "NoLookNoteTaker Watch App/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nolooknotetaker.NoLookNoteTaker.watchkitapp;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Release;
+		};
+		C205D745F452A257053E7D4D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = R4ART4YK4K;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Release;
+		};
+		ECFCB08BBA49AB040F5928D6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = NoLookNoteTaker/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nolooknotetaker.NoLookNoteTaker;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		28D1848170E2AD7F019B6072 /* Build configuration list for PBXNativeTarget "NoLookNoteTaker Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E683EA716A40799B4D6E97C /* Debug */,
+				A5EAD7404E56CB0DEEF6979B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		AADEABF4256D6591CCDA3A1D /* Build configuration list for PBXNativeTarget "NoLookNoteTaker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				08353E09314169E604639F93 /* Debug */,
+				ECFCB08BBA49AB040F5928D6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B44076900908F678C55A2429 /* Build configuration list for PBXNativeTarget "NoLookNoteTaker Watch Widget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4B98243EA5F078B85E5BD6D4 /* Debug */,
+				853307C0CA46035ED72529EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B7770E3D17F88A858D7F1B0B /* Build configuration list for PBXProject "NoLookNoteTaker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5A12FBEF0F5DACEA949496D3 /* Debug */,
+				C205D745F452A257053E7D4D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DA092B75C895C684FDDDA9A3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = exactVersion;
+				version = 11.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		37CC83141883510B4D5365BA /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DA092B75C895C684FDDDA9A3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		48915813534FCA336AD7A388 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DA092B75C895C684FDDDA9A3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		76FAE1FD227F0988D1307501 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DA092B75C895C684FDDDA9A3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 81D4029EAF98B21CBEFC3060 /* Project object */;
+}
