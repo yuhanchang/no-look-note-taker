@@ -135,6 +135,15 @@ struct NoteDetailView: View {
     @State private var showFullTranscription = false
     @State private var showAudioPlayer = false
 
+    private var shareContent: String {
+        if let summary = note.summary, !summary.isEmpty {
+            return summary
+        } else if let transcription = note.transcription, !transcription.isEmpty {
+            return transcription
+        }
+        return ""
+    }
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
@@ -211,6 +220,15 @@ struct NoteDetailView: View {
         }
         .navigationTitle("Note")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            if !shareContent.isEmpty {
+                ToolbarItem(placement: .topBarTrailing) {
+                    ShareLink(item: shareContent) {
+                        Image(systemName: "square.and.arrow.up")
+                    }
+                }
+            }
+        }
     }
 }
 
