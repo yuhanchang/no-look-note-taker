@@ -54,6 +54,10 @@ targets:
         CFBundleDisplayName: NoLookNoteTaker
         UILaunchScreen: {}
         NSMicrophoneUsageDescription: "Record voice notes for transcription"
+        UIBackgroundModes:
+          - fetch
+          - processing
+          - remote-notification
         CFBundleURLTypes:
           - CFBundleURLName: com.nolooknotetaker.NoLookNoteTaker
             CFBundleURLSchemes:

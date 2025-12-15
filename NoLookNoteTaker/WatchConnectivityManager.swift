@@ -3,6 +3,8 @@ import WatchConnectivity
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
+import UIKit
+import BackgroundTasks
 
 class WatchConnectivityManager: NSObject, ObservableObject {
     static let shared = WatchConnectivityManager()
@@ -10,6 +12,7 @@ class WatchConnectivityManager: NSObject, ObservableObject {
     private var session: WCSession?
     private let db = Firestore.firestore()
     private let storage = Storage.storage()
+    private var backgroundTask: UIBackgroundTaskIdentifier = .invalid
 
     override init() {
         super.init()
@@ -21,7 +24,29 @@ class WatchConnectivityManager: NSObject, ObservableObject {
         }
     }
 
+    private func beginBackgroundTask() {
+        // End any existing background task
+        endBackgroundTask()
+
+        backgroundTask = UIApplication.shared.beginBackgroundTask(withName: "WatchConnectivityUpload") { [weak self] in
+            print("Background task expired")
+            self?.endBackgroundTask()
+        }
+        print("Started background task: \(backgroundTask)")
+    }
+
+    private func endBackgroundTask() {
+        if backgroundTask != .invalid {
+            print("Ending background task: \(backgroundTask)")
+            UIApplication.shared.endBackgroundTask(backgroundTask)
+            backgroundTask = .invalid
+        }
+    }
+
     private func uploadRecording(data: Data, filename: String) {
+        // Start background task to ensure upload completes
+        beginBackgroundTask()
+
         guard let userId = Auth.auth().currentUser?.uid else {
             print("No authenticated user, signing in...")
             Task {
@@ -30,6 +55,7 @@ class WatchConnectivityManager: NSObject, ObservableObject {
                     self.uploadRecording(data: data, filename: filename)
                 } catch {
                     print("Auth error: \(error)")
+                    self.endBackgroundTask()
                 }
             }
             return
@@ -48,6 +74,7 @@ class WatchConnectivityManager: NSObject, ObservableObject {
         storageRef.putData(data, metadata: metadata) { [weak self] _, error in
             if let error = error {
                 print("Storage upload error: \(error)")
+                self?.endBackgroundTask()
                 return
             }
 
@@ -62,6 +89,7 @@ class WatchConnectivityManager: NSObject, ObservableObject {
                 } else {
                     print("Successfully uploaded note: \(noteId)")
                 }
+                self?.endBackgroundTask()
             }
         }
     }
