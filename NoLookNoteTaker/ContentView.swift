@@ -17,20 +17,57 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("Voice Notes")
-        }
-        .task {
-            if !viewModel.isAuthenticated {
-                await viewModel.signInAnonymously()
+            .toolbar {
+                if viewModel.isAuthenticated {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Menu {
+                            if let email = viewModel.userEmail {
+                                Text(email)
+                            }
+                            Button("Sign Out", role: .destructive) {
+                                viewModel.signOut()
+                            }
+                        } label: {
+                            Image(systemName: "person.circle")
+                        }
+                    }
+                }
             }
         }
     }
 
     private var signInView: some View {
-        VStack(spacing: 20) {
-            ProgressView()
-            Text("Signing in...")
+        VStack(spacing: 24) {
+            Image(systemName: "waveform.badge.mic")
+                .font(.system(size: 60))
+                .foregroundColor(.blue)
+
+            Text("Pain & Activity Tracker")
+                .font(.title2)
+                .fontWeight(.bold)
+
+            Text("Sign in to sync your notes across devices")
+                .multilineTextAlignment(.center)
                 .foregroundColor(.secondary)
+
+            Button(action: {
+                viewModel.signInWithGoogle()
+            }) {
+                HStack {
+                    Image(systemName: "g.circle.fill")
+                        .font(.title2)
+                    Text("Sign in with Google")
+                        .fontWeight(.medium)
+                }
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(12)
+            }
+            .padding(.horizontal, 40)
         }
+        .padding()
     }
 
     private var emptyStateView: some View {
@@ -65,6 +102,22 @@ struct ContentView: View {
                     }
                 }
             }
+
+            Section {
+                Button(role: .destructive) {
+                    viewModel.signOut()
+                } label: {
+                    HStack {
+                        Text("Sign Out")
+                        Spacer()
+                        if let email = viewModel.userEmail {
+                            Text(email)
+                                .foregroundColor(.secondary)
+                                .font(.caption)
+                        }
+                    }
+                }
+            }
         }
         .refreshable {
             // Firestore listener auto-refreshes, but this provides feedback
@@ -88,7 +141,27 @@ struct NoteRowView: View {
 
                 Spacer()
 
-                if note.status != "complete" {
+                if note.status == "complete", let category = note.category {
+                    HStack(spacing: 4) {
+                        Image(systemName: note.categoryIcon)
+                        if category == "activity", let screenType = note.screenType {
+                            Text(screenType.capitalized)
+                        } else {
+                            Text(category.capitalized)
+                        }
+                        if let duration = note.activityDurationMinutes {
+                            Text("• \(duration)m")
+                        }
+                        if let pain = note.painIntensity {
+                            Text("• \(pain)/5")
+                        }
+                    }
+                    .font(.caption2)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 2)
+                    .background(colorForStatus(note.categoryColor).opacity(0.2))
+                    .cornerRadius(4)
+                } else if note.status != "complete" {
                     Text(note.status.capitalized)
                         .font(.caption2)
                         .padding(.horizontal, 8)
@@ -125,6 +198,8 @@ struct NoteRowView: View {
         switch status {
         case "green": return .green
         case "red": return .red
+        case "blue": return .blue
+        case "gray": return .gray
         default: return .orange
         }
     }

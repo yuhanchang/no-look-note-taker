@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>No Look Note Taker</title>
+    <title>Pain & Activity Tracker</title>
     <style>
         * {
             box-sizing: border-box;
@@ -19,7 +19,7 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -81,10 +81,212 @@
             margin-bottom: 16px;
         }
 
-        .notes-list {
+        /* Tab navigation */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            background: white;
+            padding: 8px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .tab.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .tab:not(.active):hover {
+            background: #f0f0f0;
+        }
+
+        /* Timeline styles */
+        .timeline-container {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            margin-bottom: 24px;
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .timeline-header h2 {
+            font-size: 18px;
+        }
+
+        .legend {
+            display: flex;
+            gap: 16px;
+            font-size: 12px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .legend-dot.pain { background: #ff4444; }
+        .legend-dot.activity { background: #4488ff; }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e5e5e5;
+        }
+
+        .timeline-day {
+            margin-bottom: 24px;
+        }
+
+        .timeline-date {
+            font-size: 13px;
+            font-weight: 600;
+            color: #86868b;
+            margin-bottom: 12px;
+            margin-left: 48px;
+        }
+
+        .timeline-events {
             display: flex;
             flex-direction: column;
+            gap: 12px;
+        }
+
+        .timeline-event {
+            display: flex;
+            align-items: flex-start;
             gap: 16px;
+            cursor: pointer;
+            padding: 12px;
+            margin-left: 8px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .timeline-event:hover {
+            background: #f8f8f8;
+        }
+
+        .event-marker {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: white;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .event-marker.pain { background: #ff4444; }
+        .event-marker.activity { background: #4488ff; }
+        .event-marker.other { background: #888888; }
+
+        .event-content {
+            flex: 1;
+        }
+
+        .event-time {
+            font-size: 12px;
+            color: #86868b;
+            margin-bottom: 4px;
+        }
+
+        .event-summary {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .event-meta {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+            font-size: 12px;
+            color: #86868b;
+        }
+
+        .event-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Stats overview */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .stat-value.pain { color: #ff4444; }
+        .stat-value.activity { color: #4488ff; }
+
+        .stat-label {
+            font-size: 13px;
+            color: #86868b;
+        }
+
+        /* Notes list (hidden by default) */
+        .notes-list {
+            display: none;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .notes-list.active {
+            display: flex;
         }
 
         .note-card {
@@ -110,6 +312,18 @@
             color: #86868b;
         }
 
+        .category-badge {
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .category-pain { background: #ffe0e0; color: #cc0000; }
+        .category-activity { background: #e0eeff; color: #0044cc; }
+        .category-other { background: #f0f0f0; color: #666666; }
+
         .status-badge {
             padding: 2px 8px;
             border-radius: 4px;
@@ -119,9 +333,8 @@
         }
 
         .status-complete { background: #d4edda; color: #155724; }
-        .status-transcribing { background: #fff3cd; color: #856404; }
+        .status-transcribing, .status-analyzing { background: #fff3cd; color: #856404; }
         .status-error { background: #f8d7da; color: #721c24; }
-        .status-uploading { background: #cce5ff; color: #004085; }
 
         .note-content {
             font-size: 15px;
@@ -134,7 +347,8 @@
             font-style: italic;
         }
 
-        .note-detail {
+        /* Modal */
+        .modal {
             display: none;
             position: fixed;
             top: 0;
@@ -148,11 +362,11 @@
             padding: 20px;
         }
 
-        .note-detail.active {
+        .modal.active {
             display: flex;
         }
 
-        .note-detail-content {
+        .modal-content {
             background: white;
             border-radius: 16px;
             padding: 24px;
@@ -162,7 +376,7 @@
             overflow-y: auto;
         }
 
-        .note-detail-header {
+        .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -179,7 +393,7 @@
             color: #86868b;
         }
 
-        .note-detail-text {
+        .modal-text {
             font-size: 16px;
             line-height: 1.8;
             white-space: pre-wrap;
@@ -204,40 +418,104 @@
             cursor: pointer;
             margin-left: 8px;
         }
+
+        @media (max-width: 600px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .legend {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>📝 No Look Note Taker</h1>
-        <p>Your voice notes, transcribed</p>
+        <h1>⚡ Pain & Activity Tracker</h1>
+        <p>Track patterns between activities and pain</p>
     </header>
 
     <div class="container">
         <div id="auth-section" class="auth-section" style="display: none;">
-            <p style="margin-bottom: 20px;">Sign in to view your notes</p>
-            <button onclick="signIn()">Sign In Anonymously</button>
+            <p style="margin-bottom: 20px;">Sign in to view your timeline</p>
+            <button onclick="signInWithGoogle()" style="display: flex; align-items: center; gap: 12px; margin: 0 auto;">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z" fill="#4285F4"/>
+                    <path d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z" fill="#34A853"/>
+                    <path d="M3.964 10.71A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/>
+                    <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
+                </svg>
+                Sign in with Google
+            </button>
         </div>
 
         <div id="loading" class="loading" style="display: none;">
-            <p>Loading your notes...</p>
+            <p>Loading your data...</p>
         </div>
 
         <div id="empty-state" class="empty-state" style="display: none;">
             <div class="icon">🎙️</div>
-            <h2>No notes yet</h2>
-            <p>Record a voice note on your Apple Watch to get started.</p>
+            <h2>No entries yet</h2>
+            <p>Record a voice note on your Apple Watch to start tracking.</p>
         </div>
 
-        <div id="notes-list" class="notes-list"></div>
+        <div id="main-content" style="display: none;">
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('timeline')">Timeline</button>
+                <button class="tab" onclick="showTab('notes')">All Notes</button>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value pain" id="pain-count">0</div>
+                    <div class="stat-label">Pain Reports (7 days)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value activity" id="activity-count">0</div>
+                    <div class="stat-label">Activities Logged</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="total-count">0</div>
+                    <div class="stat-label">Total Entries</div>
+                </div>
+            </div>
+
+            <!-- Timeline View -->
+            <div id="timeline-view" class="timeline-container">
+                <div class="timeline-header">
+                    <h2>Recent Timeline</h2>
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-dot pain"></div>
+                            <span>Pain</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-dot activity"></div>
+                            <span>Activity</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="timeline" class="timeline">
+                    <div class="timeline-line"></div>
+                </div>
+            </div>
+
+            <!-- Notes List -->
+            <div id="notes-list" class="notes-list"></div>
+        </div>
     </div>
 
-    <div id="note-detail" class="note-detail">
-        <div class="note-detail-content">
-            <div class="note-detail-header">
-                <span id="detail-date"></span>
-                <button class="close-btn" onclick="closeDetail()">&times;</button>
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span id="modal-date"></span>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
             </div>
-            <div id="detail-text" class="note-detail-text"></div>
+            <div id="modal-text" class="modal-text"></div>
         </div>
     </div>
 
@@ -248,10 +526,9 @@
 
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
-        import { getAuth, signInAnonymously, onAuthStateChanged, signOut as firebaseSignOut } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
+        import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut as firebaseSignOut } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
         import { getFirestore, collection, query, orderBy, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js';
 
-        // Firebase config
         const firebaseConfig = {
             apiKey: "AIzaSyBYjolSmrk9fiV6LxhMCHW2aXKek-PW1I4",
             authDomain: "no-look-note-taker.firebaseapp.com",
@@ -261,17 +538,17 @@
             appId: "1:825283262610:web:ae9249ec26d649c7d58e4b"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
 
         let unsubscribe = null;
+        let allNotes = [];
+        const googleProvider = new GoogleAuthProvider();
 
-        // Make functions globally available
-        window.signIn = async () => {
+        window.signInWithGoogle = async () => {
             try {
-                await signInAnonymously(auth);
+                await signInWithPopup(auth, googleProvider);
             } catch (error) {
                 console.error('Sign in error:', error);
                 alert('Failed to sign in: ' + error.message);
@@ -287,22 +564,33 @@
             }
         };
 
-        window.openDetail = (transcription, date) => {
-            document.getElementById('detail-text').textContent = transcription || 'No transcription available';
-            document.getElementById('detail-date').textContent = date;
-            document.getElementById('note-detail').classList.add('active');
+        window.showTab = (tab) => {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (tab === 'timeline') {
+                document.getElementById('timeline-view').style.display = 'block';
+                document.getElementById('notes-list').classList.remove('active');
+            } else {
+                document.getElementById('timeline-view').style.display = 'none';
+                document.getElementById('notes-list').classList.add('active');
+            }
         };
 
-        window.closeDetail = () => {
-            document.getElementById('note-detail').classList.remove('active');
+        window.openModal = (text, date) => {
+            document.getElementById('modal-text').textContent = text || 'No content available';
+            document.getElementById('modal-date').textContent = date;
+            document.getElementById('modal').classList.add('active');
         };
 
-        // Close modal on outside click
-        document.getElementById('note-detail').addEventListener('click', (e) => {
-            if (e.target.id === 'note-detail') closeDetail();
+        window.closeModal = () => {
+            document.getElementById('modal').classList.remove('active');
+        };
+
+        document.getElementById('modal').addEventListener('click', (e) => {
+            if (e.target.id === 'modal') closeModal();
         });
 
-        // Auth state listener
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 document.getElementById('auth-section').style.display = 'none';
@@ -313,7 +601,7 @@
                 document.getElementById('auth-section').style.display = 'block';
                 document.getElementById('user-info').style.display = 'none';
                 document.getElementById('loading').style.display = 'none';
-                document.getElementById('notes-list').innerHTML = '';
+                document.getElementById('main-content').style.display = 'none';
                 document.getElementById('empty-state').style.display = 'none';
                 if (unsubscribe) unsubscribe();
             }
@@ -328,43 +616,159 @@
 
                 if (snapshot.empty) {
                     document.getElementById('empty-state').style.display = 'block';
-                    document.getElementById('notes-list').innerHTML = '';
+                    document.getElementById('main-content').style.display = 'none';
                     return;
                 }
 
                 document.getElementById('empty-state').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
 
-                const notesHtml = snapshot.docs.map(doc => {
-                    const note = doc.data();
-                    const date = note.createdAt?.toDate();
-                    const dateStr = date ? formatDate(date) : 'Just now';
-                    const statusClass = `status-${note.status}`;
+                allNotes = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
-                    let content = '';
-                    if (note.transcription) {
-                        content = `<div class="note-content">${truncate(note.transcription, 200)}</div>`;
-                    } else if (note.status === 'error') {
-                        content = `<div class="note-content placeholder">${note.error || 'Transcription failed'}</div>`;
-                    } else {
-                        content = `<div class="note-content placeholder">Transcribing...</div>`;
-                    }
-
-                    return `
-                        <div class="note-card" onclick="openDetail(\`${escapeHtml(note.transcription || '')}\`, '${dateStr}')">
-                            <div class="note-header">
-                                <span>${dateStr}</span>
-                                <span class="status-badge ${statusClass}">${note.status}</span>
-                            </div>
-                            ${content}
-                        </div>
-                    `;
-                }).join('');
-
-                document.getElementById('notes-list').innerHTML = notesHtml;
-            }, (error) => {
-                console.error('Error listening to notes:', error);
-                document.getElementById('loading').style.display = 'none';
+                updateStats();
+                renderTimeline();
+                renderNotesList();
             });
+        }
+
+        function updateStats() {
+            const sevenDaysAgo = new Date();
+            sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+            const recentNotes = allNotes.filter(n => {
+                const date = n.createdAt?.toDate();
+                return date && date > sevenDaysAgo;
+            });
+
+            const painCount = recentNotes.filter(n => n.category === 'pain').length;
+            const activityCount = recentNotes.filter(n => n.category === 'activity').length;
+
+            document.getElementById('pain-count').textContent = painCount;
+            document.getElementById('activity-count').textContent = activityCount;
+            document.getElementById('total-count').textContent = allNotes.length;
+        }
+
+        function renderTimeline() {
+            const timeline = document.getElementById('timeline');
+            const grouped = groupByDate(allNotes.slice(0, 50)); // Limit to recent 50
+
+            let html = '<div class="timeline-line"></div>';
+
+            for (const [dateStr, notes] of Object.entries(grouped)) {
+                html += `
+                    <div class="timeline-day">
+                        <div class="timeline-date">${dateStr}</div>
+                        <div class="timeline-events">
+                            ${notes.map(note => renderTimelineEvent(note)).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            timeline.innerHTML = html;
+        }
+
+        function renderTimelineEvent(note) {
+            const date = note.createdAt?.toDate();
+            const timeStr = date ? formatTime(date) : '';
+            const category = note.category || 'other';
+            const screenIcons = { phone: '📱', computer: '💻', tv: '📺' };
+            const icon = category === 'pain' ? '⚡' :
+                         category === 'activity' ? (screenIcons[note.screenType] || '🖥️') : '📝';
+            const summary = note.summary || note.transcription || 'Processing...';
+
+            let meta = '';
+            if (note.painIntensity) {
+                meta += `<span>🔥 Pain: ${note.painIntensity}/5</span>`;
+            }
+            if (note.screenType) {
+                meta += `<span>${screenIcons[note.screenType] || '🖥️'} ${note.screenType}</span>`;
+            }
+            if (note.activityDurationMinutes) {
+                meta += `<span>⏱️ ${note.activityDurationMinutes} min</span>`;
+            }
+
+            return `
+                <div class="timeline-event" onclick="openModal(\`${escapeHtml(note.summary || note.transcription || '')}\`, '${timeStr}')">
+                    <div class="event-marker ${category}">${icon}</div>
+                    <div class="event-content">
+                        <div class="event-time">${timeStr}</div>
+                        <div class="event-summary">${truncate(summary, 150)}</div>
+                        ${meta ? `<div class="event-meta">${meta}</div>` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderNotesList() {
+            const notesList = document.getElementById('notes-list');
+
+            const html = allNotes.map(note => {
+                const date = note.createdAt?.toDate();
+                const dateStr = date ? formatDate(date) : 'Just now';
+                const category = note.category || 'other';
+                const content = note.summary || note.transcription;
+
+                let contentHtml = '';
+                if (content) {
+                    contentHtml = `<div class="note-content">${truncate(content, 200)}</div>`;
+                } else if (note.status === 'error') {
+                    contentHtml = `<div class="note-content placeholder">${note.error || 'Processing failed'}</div>`;
+                } else {
+                    contentHtml = `<div class="note-content placeholder">Processing...</div>`;
+                }
+
+                return `
+                    <div class="note-card" onclick="openModal(\`${escapeHtml(content || '')}\`, '${dateStr}')">
+                        <div class="note-header">
+                            <span>${dateStr}</span>
+                            ${note.status === 'complete'
+                                ? `<span class="category-badge category-${category}">${category}</span>`
+                                : `<span class="status-badge status-${note.status}">${note.status}</span>`
+                            }
+                        </div>
+                        ${contentHtml}
+                    </div>
+                `;
+            }).join('');
+
+            notesList.innerHTML = html;
+        }
+
+        function groupByDate(notes) {
+            const groups = {};
+            const today = new Date();
+            const yesterday = new Date(today);
+            yesterday.setDate(yesterday.getDate() - 1);
+
+            notes.forEach(note => {
+                const date = note.createdAt?.toDate();
+                if (!date) return;
+
+                let dateStr;
+                if (isSameDay(date, today)) {
+                    dateStr = 'Today';
+                } else if (isSameDay(date, yesterday)) {
+                    dateStr = 'Yesterday';
+                } else {
+                    dateStr = date.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+                }
+
+                if (!groups[dateStr]) groups[dateStr] = [];
+                groups[dateStr].push(note);
+            });
+
+            return groups;
+        }
+
+        function isSameDay(d1, d2) {
+            return d1.getFullYear() === d2.getFullYear() &&
+                   d1.getMonth() === d2.getMonth() &&
+                   d1.getDate() === d2.getDate();
+        }
+
+        function formatTime(date) {
+            return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
         }
 
         function formatDate(date) {
@@ -388,7 +792,7 @@
 
         function escapeHtml(str) {
             if (!str) return '';
-            return str.replace(/`/g, '\\`').replace(/\$/g, '\\$');
+            return str.replace(/`/g, '\\`').replace(/\$/g, '\\$').replace(/\n/g, ' ');
         }
     </script>
 </body>

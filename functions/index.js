@@ -89,28 +89,47 @@ exports.transcribeAudio = onObjectFinalized(
 
       console.log("Transcription complete:", transcription.substring(0, 100) + "...");
 
-      // Update status to summarizing
+      // Update status to analyzing
       await noteRef.set(
         {
           transcription: transcription,
-          status: "summarizing",
+          status: "analyzing",
           updatedAt: new Date(),
         },
         { merge: true }
       );
 
-      // Generate detailed summary using GPT
-      const summaryResponse = await openai.chat.completions.create({
+      // Generate summary and classify the recording in one call
+      const analysisResponse = await openai.chat.completions.create({
         model: "gpt-4o-mini",
         messages: [
           {
             role: "system",
-            content:
-              "You are a helpful assistant that cleans up and summarizes voice note transcriptions. " +
-              "Create a detailed summary that preserves all the important information but fixes grammar, " +
-              "removes filler words (um, uh, like), and organizes the content clearly. " +
-              "Keep the summary detailed - don't shorten it significantly, just clean it up. " +
-              "Use natural paragraphs. Do not add any preamble like 'Here is the summary:' - just provide the cleaned up content directly.",
+            content: `You are a helpful assistant that analyzes voice note transcriptions for a health/pain tracking app focused on eye strain and screen usage.
+
+Your tasks:
+1. CLASSIFY the recording into one of these categories:
+   - "pain": Reports of pain or discomfort (e.g., "my eyes hurt", "I have a headache", "feeling strain")
+   - "activity": Reports of screen-related activities (e.g., "I looked at my phone for 30 minutes", "worked on computer for 2 hours", "watched TV")
+   - "other": Anything that doesn't fit the above categories
+
+2. SUMMARIZE the content: Clean up the transcription by fixing grammar, removing filler words (um, uh, like), and organizing clearly. Keep it detailed - don't shorten significantly.
+
+3. For PAIN reports:
+   - Extract painIntensity on a 1-5 scale (1=mild, 2=noticeable, 3=moderate, 4=severe, 5=extreme). Infer from context if not explicitly stated.
+
+4. For ACTIVITY reports:
+   - Extract screenType: "phone", "computer" (includes laptop/desktop), "tv", or "other"
+   - Extract activityDurationMinutes: duration in minutes if mentioned, otherwise null
+
+Respond in JSON format:
+{
+  "category": "pain" | "activity" | "other",
+  "summary": "cleaned up transcription...",
+  "painIntensity": number (1-5) | null,
+  "screenType": "phone" | "computer" | "tv" | "other" | null,
+  "activityDurationMinutes": number | null
+}`,
           },
           {
             role: "user",
@@ -118,16 +137,21 @@ exports.transcribeAudio = onObjectFinalized(
           },
         ],
         max_tokens: 2000,
+        response_format: { type: "json_object" },
       });
 
-      const summary = summaryResponse.choices[0].message.content;
-      console.log("Summary complete:", summary.substring(0, 100) + "...");
+      const analysis = JSON.parse(analysisResponse.choices[0].message.content);
+      console.log("Analysis complete:", analysis.category, "-", analysis.summary.substring(0, 50) + "...");
 
-      // Save transcription and summary to Firestore
+      // Save transcription, summary, and classification to Firestore
       await noteRef.set(
         {
           transcription: transcription,
-          summary: summary,
+          summary: analysis.summary,
+          category: analysis.category,
+          painIntensity: analysis.painIntensity,
+          screenType: analysis.screenType,
+          activityDurationMinutes: analysis.activityDurationMinutes,
           status: "complete",
           updatedAt: new Date(),
         },

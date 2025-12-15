@@ -1,6 +1,7 @@
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
+import GoogleSignIn
 import Combine
 
 @MainActor
@@ -9,6 +10,7 @@ class NotesViewModel: ObservableObject {
     @Published var isLoading = true
     @Published var error: String?
     @Published var isAuthenticated = false
+    @Published var userEmail: String?
 
     private var db = Firestore.firestore()
     private var listener: ListenerRegistration?
@@ -18,6 +20,7 @@ class NotesViewModel: ObservableObject {
         authListener = Auth.auth().addStateDidChangeListener { [weak self] _, user in
             Task { @MainActor in
                 self?.isAuthenticated = user != nil
+                self?.userEmail = user?.email
                 if let userId = user?.uid {
                     self?.startListening(userId: userId)
                 } else {
@@ -35,9 +38,37 @@ class NotesViewModel: ObservableObject {
         }
     }
 
-    func signInAnonymously() async {
+    func signInWithGoogle() {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let rootViewController = windowScene.windows.first?.rootViewController else {
+            self.error = "Unable to get root view controller"
+            return
+        }
+
+        Task {
+            do {
+                let result = try await GIDSignIn.sharedInstance.signIn(withPresenting: rootViewController)
+                guard let idToken = result.user.idToken?.tokenString else {
+                    self.error = "Unable to get ID token"
+                    return
+                }
+
+                let credential = GoogleAuthProvider.credential(
+                    withIDToken: idToken,
+                    accessToken: result.user.accessToken.tokenString
+                )
+
+                try await Auth.auth().signIn(with: credential)
+            } catch {
+                self.error = error.localizedDescription
+            }
+        }
+    }
+
+    func signOut() {
         do {
-            try await Auth.auth().signInAnonymously()
+            try Auth.auth().signOut()
+            GIDSignIn.sharedInstance.signOut()
         } catch {
             self.error = error.localizedDescription
         }

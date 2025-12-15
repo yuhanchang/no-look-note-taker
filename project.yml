@@ -5,6 +5,31 @@ options:
     iOS: "18.0"
     watchOS: "26.0"
   xcodeVersion: "16.0"
+  createIntermediateGroups: true
+  generateEmptyDirectories: true
+
+schemes:
+  NoLookNoteTaker:
+    build:
+      targets:
+        NoLookNoteTaker: all
+    run:
+      config: Debug
+    profile:
+      config: Release
+    archive:
+      config: Release
+
+  NoLookNoteTaker Watch App:
+    build:
+      targets:
+        NoLookNoteTaker Watch App: all
+    run:
+      config: Debug
+    profile:
+      config: Release
+    archive:
+      config: Release
 
 settings:
   DEVELOPMENT_TEAM: R4ART4YK4K
@@ -13,6 +38,9 @@ packages:
   Firebase:
     url: https://github.com/firebase/firebase-ios-sdk
     version: 11.0.0
+  GoogleSignIn:
+    url: https://github.com/google/GoogleSignIn-iOS
+    version: 8.0.0
 
 targets:
   NoLookNoteTaker:
@@ -26,6 +54,10 @@ targets:
         CFBundleDisplayName: NoLookNoteTaker
         UILaunchScreen: {}
         NSMicrophoneUsageDescription: "Record voice notes for transcription"
+        CFBundleURLTypes:
+          - CFBundleURLName: com.nolooknotetaker.NoLookNoteTaker
+            CFBundleURLSchemes:
+              - com.googleusercontent.apps.825283262610-9ud28rmtnnd5gqqvu8c001l9lshanh4m
     dependencies:
       - package: Firebase
         product: FirebaseAuth
@@ -33,6 +65,8 @@ targets:
         product: FirebaseFirestore
       - package: Firebase
         product: FirebaseStorage
+      - package: GoogleSignIn
+        product: GoogleSignIn
       - target: NoLookNoteTaker Watch App
         embed: true
 
